@@ -134,4 +134,27 @@ public class helper {
 		}
 		return min;
 	}
+
+	// Get the Prefix sum in given range query(Array List B) for data (Array List A)
+	public ArrayList<Long> rangeSum(ArrayList<Integer> A, ArrayList<ArrayList<Integer>> B) {
+		ArrayList<Long> C = new ArrayList<Long>(); // Create a new long ArrayList to avoid test case failure
+		C.add((long) A.get(0)); // Adding intial element to new ArrayList
+		for (int i = 1; i < A.size(); i++) {
+			C.add((long) (C.get(i - 1) + A.get(i))); // Adding prefix sum to new ArrayList
+		}
+		ArrayList<Long> answer = new ArrayList<Long>(); // return answer array list
+		for (int i = 0; i < B.size(); i++) {
+			ArrayList<Integer> index = B.get(i);
+			int start_index = index.get(0); // start index for prefix sum
+			int end_index = index.get(1); // end index fro prefix sum
+			if (start_index == 0) {
+				answer.add((long) C.get(end_index)); // add the C[end_index] if start index is 0
+			} else {
+				long SUM = (long) (C.get(end_index) - (C.get(start_index - 1))); // Calculate the sum if start index is
+																					// not 0
+				answer.add(SUM);
+			}
+		}
+		return answer; // return answer array list
+	}
 }
