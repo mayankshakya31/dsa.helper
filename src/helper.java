@@ -161,15 +161,19 @@ public class helper {
 	// find the equilibrium index of Array
 	public int equilibrium_index(ArrayList<Integer> A) {
 		// Calculate prefix sum
+		ArrayList<Integer> prefixSums = new ArrayList<>(A.size());
+		prefixSums.add(A.get(0));
 		for (int i = 1; i < A.size(); i++) {
-			A.set(i, A.get(i - 1) + A.get(i));
+			prefixSums.add(prefixSums.get(i - 1) + A.get(i));
 		}
 
 		// Calculate equilibrium index
-		if ((A.get(A.size() - 1) - A.get(0)) == 0) // check for the corner case of index 0 as equilibrim index
+		// check for the corner case of index 0 as equilibrim index
+		if ((prefixSums.get(A.size() - 1) - prefixSums.get(0)) == 0)
 			return 0;
 		for (int i = 1; i < A.size(); i++) {
-			if (A.get(i - 1) == (A.get(A.size() - 1) - A.get(i))) // find the equilibrium index for remaining indexes
+			// find the equilibrium index for remaining indexes
+			if (prefixSums.get(i - 1) == (prefixSums.get(A.size() - 1) - prefixSums.get(i)))
 				return i;
 		}
 		return -1;
