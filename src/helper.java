@@ -180,7 +180,7 @@ public class helper {
 	}
 
 	// Get number of subsequent A and G in a string
-	public int calculateSubsequestAG(String A) {
+	public int calculateSubsequentAG(String A) {
 		int M = 1000000007; // For modulus of answer
 		long answer = 0;
 		long count = 0;
@@ -200,7 +200,7 @@ public class helper {
 	}
 
 	// Calculate leader element in a Array
-	public ArrayList<Integer> leaderElement(ArrayList<Integer> A) {
+	public ArrayList<Integer> findLeaderElement(ArrayList<Integer> A) {
 		ArrayList<Integer> answer = new ArrayList<Integer>();
 		int N = A.size();
 		int max = A.get(N - 1);
