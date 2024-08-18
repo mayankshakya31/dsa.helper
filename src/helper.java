@@ -178,4 +178,63 @@ public class helper {
 		}
 		return -1;
 	}
+
+	// Get number of subsequent A and G in a string
+	public int calculateSubsequentAG(String A) {
+		int M = 1000000007; // For modulus of answer
+		long answer = 0;
+		long count = 0;
+		int N = A.length();
+		if (A.charAt(N - 1) == 'G')
+			count = 1;
+		else
+			count = 0;
+		for (int i = N - 2; i >= 0; i--) {
+			if (A.charAt(i) == 'G')
+				count += 1;
+			if (A.charAt(i) == 'A')
+				answer += count;
+			answer = answer % M;
+		}
+		return (int) answer;
+	}
+
+	// Calculate leader element in a Array
+	public ArrayList<Integer> findLeaderElement(ArrayList<Integer> A) {
+		ArrayList<Integer> answer = new ArrayList<Integer>();
+		int N = A.size();
+		int max = A.get(N - 1);
+		answer.add(max);
+		for (int i = N - 2; i >= 0; i--) {
+			if (A.get(i) > max) {
+				max = A.get(i);
+				answer.add(A.get(i));
+			}
+		}
+		return answer;
+	}
+
+	// Smallest sized array containing maximum and minimum element of array
+	public int smallestArrayWithMaxAndMin(ArrayList<Integer> A) {
+		int N = A.size();
+		int min = get_smallest(A);
+		int max = get_largest(A);
+		int minID = -1;
+		int maxID = -1;
+		int answer = N;
+		for (int i = 0; i < N; i++) {
+			if (A.get(i) == min) {
+				if (maxID != -1)
+					answer = Math.min(answer, i - maxID + 1);
+				minID = i;
+			}
+			if (A.get(i) == max) {
+				if (minID != -1)
+					answer = Math.min(answer, i - minID + 1);
+				maxID = i;
+			}
+		}
+		return answer;
+	}
+
 }
